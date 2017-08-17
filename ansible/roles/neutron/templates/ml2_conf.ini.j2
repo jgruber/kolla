@@ -20,11 +20,7 @@ extension_drivers = qos
 {% endif %}
 
 [ml2_type_vlan]
-{% if enable_ironic | bool %}
 network_vlan_ranges = physnet1
-{% else %}
-network_vlan_ranges =
-{% endif %}
 
 [ml2_type_flat]
 {% if enable_ironic | bool %}

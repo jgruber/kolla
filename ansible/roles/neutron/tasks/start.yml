@@ -263,8 +263,27 @@
       - "neutron_metadata_socket:/var/lib/neutron/kolla/"
       - "kolla_logs:/var/log/kolla/"
   when:
-    - enable_neutron_lbaas | bool
+    - enable_neutron_lbaas_agent | bool
     - inventory_hostname in groups['neutron-lbaas-agent']
+
+- name: Starting f5-openstack-agent container
+  kolla_docker:
+    action: "start_container"
+    common_options: "{{ docker_common_options }}"
+    image: "{{ f5_openstack_agent_image_full }}"
+    name: "f5_openstack_agent"
+    privileged: True
+    restart_policy: "{{ f5_openstack_agent_restart_policy }}"
+    volumes:
+      - "{{ node_config_directory }}/f5-openstack-agent/:{{ container_config_directory }}/:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/run:/run:shared"
+      - "/run/netns/:/run/netns/:shared"
+      - "neutron_metadata_socket:/var/lib/neutron/kolla/"
+      - "kolla_logs:/var/log/kolla/"
+  when:
+    - enable_f5_lbaas | bool
+    - inventory_hostname in groups['f5-openstack-agent']
 
 - name: Starting neutron-metadata-agent container
   kolla_docker:
@@ -295,7 +314,6 @@
       - "/etc/localtime:/etc/localtime:ro"
       - "/run:/run:shared"
       - "/run/netns/:/run/netns/:shared"
-      - "/lib/modules:/lib/modules:ro"
       - "neutron_metadata_socket:/var/lib/neutron/kolla/"
       - "kolla_logs:/var/log/kolla/"
   when:

@@ -14,6 +14,7 @@
     - { name: neutron_l3_agent, group: neutron-l3-agent }
     - { name: neutron_l3_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_lbaas_agent, group: neutron-lbaas-agent, enabled: "{{ enable_neutron_lbaas | bool }}" }
+    - { name: f5_openstack_agent, group: f5-openstack-agent, enabled: "{{ enable_f5_lbaas | bool }}" }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }    
     - { name: neutron_metadata_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_vpnaas_agent, group: neutron-vpnaas-agent, enabled: "{{ enable_neutron_vpnaas | bool }}" }
@@ -77,6 +78,7 @@
     - { name: neutron_l3_agent, group: neutron-l3-agent }
     - { name: neutron_l3_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_lbaas_agent, group: neutron-lbaas-agent, enabled: "{{ enable_neutron_lbaas | bool }}" }
+    - { name: f5_openstack_agent, group: f5-openstack-agent, enabled: "{{ enable_f5_lbaas | bool }}" }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }
     - { name: neutron_metadata_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_vpnaas_agent, group: neutron-vpnaas-agent, enabled: "{{ enable_neutron_vpnaas | bool }}" }
@@ -139,6 +141,7 @@
     - { name: neutron_l3_agent, group: neutron-l3-agent }
     - { name: neutron_l3_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_lbaas_agent, group: neutron-lbaas-agent, enabled: "{{ enable_neutron_lbaas | bool }}" }
+    - { name: f5_openstack_agent, group: f5-openstack-agent, enabled: "{{ enable_f5_lbaas | bool }}" }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }
     - { name: neutron_metadata_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" }
     - { name: neutron_vpnaas_agent, group: neutron-vpnaas-agent, enabled: "{{ enable_neutron_vpnaas | bool }}" }
@@ -200,6 +203,7 @@
        { name: neutron_l3_agent, group: neutron-l3-agent },
        { name: neutron_l3_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" },
        { name: neutron_lbaas_agent, group: neutron-lbaas-agent, enabled: "{{ enable_neutron_lbaas | bool }}" },
+       { name: f5_openstack_agent, group: f5-openstack-agent, enabled: "{{ enable_f5_lbaas | bool }}" },
        { name: neutron_metadata_agent, group: neutron-metadata-agent },
        { name: neutron_metadata_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" },
        { name: neutron_vpnaas_agent, group: neutron-vpnaas-agent, enabled: "{{ enable_neutron_vpnaas | bool }}" }]
@@ -272,6 +276,7 @@
        { name: neutron_l3_agent, group: neutron-l3-agent },
        { name: neutron_l3_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" },
        { name: neutron_lbaas_agent, group: neutron-lbaas-agent, enabled: "{{ enable_neutron_lbaas | bool }}" },
+       { name: f5_openstack_agent, group: f5-openstack-agent, enabled: "{{ enable_f5_lbaas | bool }}" },
        { name: neutron_metadata_agent, group: neutron-metadata-agent },
        { name: neutron_metadata_agent, group: compute, enabled: "{{ enable_neutron_dvr | bool }}" },
        { name: neutron_vpnaas_agent, group: neutron-vpnaas-agent, enabled: "{{ enable_neutron_vpnaas | bool }}" }]
