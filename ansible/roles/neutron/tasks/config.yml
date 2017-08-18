@@ -125,7 +125,7 @@
       service_name: "{{ item }}"
     sources:
       - "{{ role_path }}/templates/f5-openstack-agent.ini.j2"
-      - "{{ node_custom_config }}/neutron/f5-openstack-agent.ini"
+      - "/etc/kolla/config/neutron/f5-openstack-agent.ini"
     dest: "{{ node_config_directory }}/{{ item }}/f5-openstack-agent.ini"
   with_items:
     - "f5-openstack-agent"
