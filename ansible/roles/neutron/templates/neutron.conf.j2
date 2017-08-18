@@ -32,7 +32,8 @@ host = {{ ansible_hostname }}_{{ item }}
 
 allow_overlapping_ips = true
 core_plugin = ml2
-service_plugins = router
+service_plugins = router{% if enable_neutron_lbaas | bool %},neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2{% endif %}{% if enable_neutron_qos | bool %},qos{% endif %}{% if enable_neutron_vpnaas | bool %},neutron_vpnaas.services.vpn.plugin.VPNDriverPlugin{% endif %}{% if neutron_plugin_agent == "sfc" %}flow_classifier,sfc{% endif %}
+
 
 [nova]
 auth_url = {{ internal_protocol }}://{{ kolla_internal_fqdn }}:{{ keystone_admin_port }}
