@@ -8,6 +8,12 @@
             "perm": "0600"
         },
         {
+            "source": "{{ container_config_directory }}/neutron_lbaas.conf",
+            "dest": "/etc/neutron/neutron_lbaas.conf",
+            "owner": "neutron",
+            "perm": "0600"
+        },
+        {
             "source": "{{ container_config_directory }}/ml2_conf.ini",
             "dest": "/etc/neutron/plugins/ml2/ml2_conf.ini",
             "owner": "neutron",
