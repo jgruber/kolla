@@ -10,6 +10,7 @@
     - { name: neutron_server, group: neutron-server }
     - { name: neutron_dhcp_agent, group: neutron-dhcp-agent }
     - { name: neutron_l3_agent, group: neutron-l3-agent }
+    - { name: f5_openstack_agent, group: f5-openstack-agent }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }
 
 - name: Ensuring the neutron_openvswitch_agent container is up
@@ -61,6 +62,7 @@
     - { name: neutron_server, group: neutron-server }
     - { name: neutron_dhcp_agent, group: neutron-dhcp-agent }
     - { name: neutron_l3_agent, group: neutron-l3-agent }
+    - { name: f5_openstack_agent, group: f5-openstack-agent }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }
 
 - name: Check the configs in the neutron_openvswitch_agent container
@@ -111,6 +113,7 @@
     - { name: neutron_server, group: neutron-server }
     - { name: neutron_dhcp_agent, group: neutron-dhcp-agent }
     - { name: neutron_l3_agent, group: neutron-l3-agent }
+    - { name: f5_openstack_agent, group: f5-openstack-agent }
     - { name: neutron_metadata_agent, group: neutron-metadata-agent }
 
 - name: Container config strategy for the neutron_openvswitch_agent container
@@ -161,6 +164,7 @@
     - [{ name: neutron_server, group: neutron-server },
        { name: neutron_dhcp_agent, group: neutron-dhcp-agent },
        { name: neutron_l3_agent, group: neutron-l3-agent },
+       { name: f5_openstack_agent, group: f5-openstack-agent },
        { name: neutron_metadata_agent, group: neutron-metadata-agent }]
     - neutron_container_envs.results
     - neutron_check_results.results
@@ -222,6 +226,7 @@
     - [{ name: neutron_server, group: neutron-server },
        { name: neutron_dhcp_agent, group: neutron-dhcp-agent },
        { name: neutron_l3_agent, group: neutron-l3-agent },
+       { name: f5_openstack_agent, group: f5-openstack-agent },
        { name: neutron_metadata_agent, group: neutron-metadata-agent }]
     - neutron_container_envs.results
     - neutron_check_results.results

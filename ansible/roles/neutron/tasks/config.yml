@@ -20,6 +20,7 @@
     - "neutron-linuxbridge-agent"
     - "neutron-metadata-agent"
     - "neutron-openvswitch-agent"
+    - "f5-openstack-agent"
     - "neutron-server"
     - "openvswitch-db-server"
     - "openvswitch-vswitchd"
@@ -34,6 +35,7 @@
     - "neutron-linuxbridge-agent"
     - "neutron-metadata-agent"
     - "neutron-openvswitch-agent"
+    - "f5-openstack-agent"
     - "neutron-server"
     - "openvswitch-db-server"
     - "openvswitch-vswitchd"
@@ -57,6 +59,7 @@
     - "neutron-linuxbridge-agent"
     - "neutron-metadata-agent"
     - "neutron-openvswitch-agent"
+    - "f5-openstack-agent"
     - "neutron-server"
 
 - name: Copying over ml2_conf.ini
@@ -115,6 +118,17 @@
     dest: "{{ node_config_directory }}/{{ item }}/fwaas_driver.ini"
   with_items:
     - "neutron-l3-agent"
+
+- name: Copying over f5-openstack-agent.ini
+  merge_configs:
+    vars:
+      service_name: "{{ item }}"
+    sources:
+      - "{{ role_path }}/templates/f5-openstack-agent.ini.j2"
+      - "{{ node_custom_config }}/neutron/f5-openstack-agent.ini"
+    dest: "{{ node_config_directory }}/{{ item }}/f5-openstack-agent.ini"
+  with_items:
+    - "f5-openstack-agent"
 
 - name: Copying over metadata_agent.ini
   merge_configs:

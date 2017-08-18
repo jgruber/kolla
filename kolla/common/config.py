@@ -213,6 +213,10 @@ SOURCES = {
         'type': 'url',
         'location': ('http://tarballs.openstack.org/neutron/'
                      'neutron-8.4.0.tar.gz')},
+    'f5-openstack-agent': {
+        'type': 'url',
+        'location': ('https://github.com/F5Networks/f5-openstack-agent/archive/'
+                     'v9.3.2.tar.gz')},
     'nova-base': {
         'type': 'url',
         'location': ('http://tarballs.openstack.org/nova/'

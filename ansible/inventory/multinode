@@ -145,6 +145,9 @@ neutron
 [neutron-metadata-agent:children]
 neutron
 
+[f5-openstack-agent:children]
+control
+
 # Cinder
 [cinder-api:children]
 cinder

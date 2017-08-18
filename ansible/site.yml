@@ -108,6 +108,7 @@
     - neutron-dhcp-agent
     - neutron-l3-agent
     - neutron-metadata-agent
+    - f5-openstack-agent
     - compute
     - manila-share
     - rabbitmq

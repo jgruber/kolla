@@ -13,6 +13,13 @@
     image: "{{ neutron_l3_agent_image_full }}"
   when: inventory_hostname in groups['neutron-l3-agent']
 
+- name: Pulling f5-openstack-agent image
+  kolla_docker:
+    action: "pull_image"
+    common_options: "{{ docker_common_options }}"
+    image: "{{ f5_openstack_agent_image_full }}"
+  when: inventory_hostname in groups['f5-openstack-agent']
+
 - name: Pulling neutron-linuxbridge-agent image
   kolla_docker:
     action: "pull_image"

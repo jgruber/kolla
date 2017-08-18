@@ -44,6 +44,10 @@ openvswitch_vswitchd_image: "{{ docker_registry ~ '/' if docker_registry else ''
 openvswitch_vswitchd_tag: "{{ openstack_release }}"
 openvswitch_vswitchd_image_full: "{{ openvswitch_vswitchd_image }}:{{ openvswitch_vswitchd_tag }}"
 
+f5_openstack_agent_image: "{{ docker_registry ~ '/' if docker_registry else '' }}{{ docker_namespace }}/{{ kolla_base_distro }}-{{ kolla_install_type }}-f5-openstack-agent"
+f5_openstack_agent_tag: "{{ openstack_release }}"
+f5_openstack_agent_image_full: "{{ f5_openstack_agent_image }}:{{ f5_openstack_agent_tag }}"
+
 
 ####################
 # OpenStack
