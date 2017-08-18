@@ -5,15 +5,15 @@ MAINTAINER {{ maintainer }}
 
 {% import "macros.j2" as macros with context %}
 
-{% set f5_openstack_agent_header_packages = [
-    'pip'
-] %}
-{{ macros.install_packages(f5_openstack_agent_packages | customizable("packages")) }}
+{% set agent_git_repo = "https://github.com/F5Networks/f5-openstack-agent" %}
+{% set agent_tag = "v10.0.0" %}
 
-RUN pip install git+https://github.com/F5Networks/f5-openstack-agent@v10.0.0
+RUN pip install git+{{ agent_git_repo }}@{{ agent_tag }}
+
+COPY extend_start.sh /usr/local/bin/kolla_neutron_extend_start
+RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start
 
 {% block f5_openstack_agent_footer %}{% endblock %}
 {% block footer %}{% endblock %}
-{{ include_footer }}
 
 USER neutron
