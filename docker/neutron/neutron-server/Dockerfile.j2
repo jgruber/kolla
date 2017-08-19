@@ -8,6 +8,12 @@ RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start \
            pip --no-cache-dir install --upgrade -c requirements/upper-constraints.txt /plugins/*; \
        fi
 
+RUN pip install git+https://github.com/F5Networks/f5-openstack-lbaasv2-driver@v9.3.2 && \
+  curl -L -o /tmp/f5.tgz https://github.com/F5Networks/neutron-lbaas/releases/download/v9.1.0/f5.tgz && \
+  tar xvf /tmp/f5.tgz -C /usr/lib/python2.7/site-packages/neutron_lbaas/drivers/ && \
+  rm -rf /tmp/f5.tgz
+
+
 {{ include_footer }}
 
 USER neutron

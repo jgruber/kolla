@@ -68,8 +68,8 @@
       service_name: "{{ item }}"
     sources:
       - "{{ role_path }}/templates/neutron_lbaas.conf.j2"
-      - "{{ node_custom_config }}/neutron/neutron_lbaas.conf"
-      - "{{ node_custom_config }}/neutron/{{ inventory_hostname }}/neutron_lbaas.conf"
+      - "/etc/kolla/config/neutron/neutron_lbaas.conf"
+      - "/etc/kolla/config/neutron/{{ inventory_hostname }}/neutron_lbaas.conf"
     dest: "{{ node_config_directory }}/{{ item }}/neutron_lbaas.conf"
   with_items:
     - "neutron-server"
