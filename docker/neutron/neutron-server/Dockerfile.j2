@@ -3,26 +3,15 @@ MAINTAINER {{ maintainer }}
 
 {% if install_type == 'binary' %}
     {% if base_distro in ['centos', 'fedora', 'oraclelinux', 'rhel'] %}
-
-        {% set neutron_server_packages = [
-            'openstack-neutron-lbaas',
-            'openstack-neutron-vpnaas',
-        ] %}
-
+        RUN yum -y install openstack-neutron-lbaas
     {% elif base_distro in ['ubuntu'] %}
-
-        {% set neutron_server_packages = [
-            'neutron-lbaasv2-agent',
-            'python-neutron-lbaas',
-            'python-neutron-vpnaas',
-        ] %}
-
+        RUN apt-get install python-neutron-lbaas
     {% endif %}
 {% elif install_type == 'source' %}
-RUN pip install http://tarballs.openstack.org/neutron-lbaas/neutron-lbaas-9.2.0.tar.gz
+    RUN pip --no-cache-dir install --upgrade http://tarballs.openstack.org/neutron-lbaas/neutron-lbaas-9.2.0.tar.gz
 {% endif %}
 
-RUN pip install git+https://github.com/F5Networks/f5-openstack-lbaasv2-driver@v9.3.2 && \
+RUN pip --no-cache-dir install --upgrade git+https://github.com/F5Networks/f5-openstack-lbaasv2-driver@v9.3.2 && \
   curl -L -o /tmp/f5.tgz https://github.com/F5Networks/neutron-lbaas/releases/download/v9.1.0/f5.tgz && \
   tar xvf /tmp/f5.tgz -C /usr/lib/python2.7/site-packages/neutron_lbaas/drivers/ && \
   rm -rf /tmp/f5.tgz
