@@ -31,3 +31,19 @@ fi
 if [[ $(stat -c %a /var/log/kolla/horizon) != "755" ]]; then
     chmod 755 /var/log/kolla/horizon
 fi
+
+
+if [[ ${KOLLA_INSTALL_TYPE} == "binary" ]]; then
+    SITE_PACKAGES="/usr/lib/python2.7/site-packages"
+elif [[ ${KOLLA_INSTALL_TYPE} == "source" ]]; then
+    SITE_PACKAGES="/var/lib/kolla/venv/lib/python2.7/site-packages"
+fi
+
+function config_neutron_lbaas {
+    SRC="${SITE_PACKAGES}/neutron_lbaas_dashboard/enabled/_1480_project_loadbalancersv2_panel.py"
+    DEST="${SITE_PACKAGES}/openstack_dashboard/local/enabled/_1480_project_loadbalancersv2_panel.py"
+    cp -f $SRC $DEST
+}
+
+config_neutron_lbaas
+
