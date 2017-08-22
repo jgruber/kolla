@@ -448,6 +448,10 @@ SOURCES = {
         'type': 'url',
         'location': ('$tarballs_base/neutron-lbaas/'
                      'neutron-lbaas-10.0.1.tar.gz')},
+    'f5-openstack-agent': {
+        'type': 'url',
+        'location': ('https://github.com/F5Networks/f5-openstack-agent/archive/'
+                     'v10.0.0.tar.gz')},
     'neutron-server-plugin-neutron-lbaas': {
         'type': 'url',
         'location': ('$tarballs_base/neutron-lbaas/'
