@@ -6,7 +6,7 @@ MAINTAINER {{ maintainer }}
 {% import "macros.j2" as macros with context %}
 
 {% set agent_git_repo = "https://github.com/F5Networks/f5-openstack-agent" %}
-{% set agent_tag = "v10.0.0" %}
+{% set agent_tag = "v10.1.0" %}
 
 RUN pip install git+{{ agent_git_repo }}@{{ agent_tag }}
 
