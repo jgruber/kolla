@@ -13,7 +13,8 @@ MAINTAINER {{ maintainer }}
                 'httpd',
                 'mod_wsgi',
                 'gettext',
-                'openstack-neutron-lbaas-ui'
+                'openstack-neutron-lbaas-ui',
+                'git'
         ] %}
 
 {{ macros.install_packages(horizon_packages | customizable("packages")) }}
@@ -39,7 +40,8 @@ RUN useradd --user-group horizon \
                 'openstack-dashboard',
                 'apache2',
                 'libapache2-mod-wsgi',
-                'gettext'
+                'gettext',
+                'git'
         ] %}
 
 {{ macros.install_packages(horizon_packages | customizable("packages")) }}
@@ -62,6 +64,12 @@ RUN echo > /etc/apache2/ports.conf \
     && ln -s /usr/share/openstack-dashboard/static /usr/lib/python2.7/site-packages/static \
     && (cd /usr/lib/python2.7/site-packages/horizon && /usr/bin/python /usr/bin/manage.py compilemessages) \
     && (cd /usr/lib/python2.7/site-packages/openstack_dashboard && /usr/bin/python /usr/bin/manage.py compilemessages)
+
+RUN git clone https://git.openstack.org/openstack/neutron-lbaas-dashboard \
+    && cd neutron-lbaas-dashboard \
+    && git checkout 3.0.1 -b newton \
+    && python setup.py install \
+    && cp ./neutron_lbaas_dashboard/enabled/_1481_project_ng_loadbalancersv2_panel.py /usr/share/openstack-dashboard/openstack_dashboard/local/enabled/_1481_project_ng_loadbalancersv2_panel.py
 {% endblock %}
 
     {% endif %}
@@ -71,7 +79,8 @@ RUN echo > /etc/apache2/ports.conf \
         {% set horizon_packages = [
                 'httpd',
                 'mod_wsgi',
-                'gettext'
+                'gettext',
+                'git'
         ] %}
 
 {{ macros.install_packages(horizon_packages | customizable("packages")) }}
@@ -85,7 +94,8 @@ RUN sed -i -r 's,^(Listen 80),#\1,' /etc/httpd/conf/httpd.conf
         {% set horizon_packages = [
                 'apache2',
                 'libapache2-mod-wsgi',
-                'gettext'
+                'gettext',
+                'git'
         ] %}
 
 {{ macros.install_packages(horizon_packages | customizable("packages")) }}
