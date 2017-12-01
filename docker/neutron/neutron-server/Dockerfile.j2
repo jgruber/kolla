@@ -11,6 +11,8 @@ MAINTAINER {{ maintainer }}
         {% set neutron_server_packages = [
             'openstack-neutron-lbaas',
             'openstack-neutron-vpnaas',
+            'python-pip',
+            'git',
         ] %}
 
     {% elif base_distro in ['ubuntu'] %}
@@ -19,6 +21,8 @@ MAINTAINER {{ maintainer }}
             'neutron-lbaasv2-agent',
             'python-neutron-lbaas',
             'python-neutron-vpnaas',
+            'pyhton-pip',
+            'git',
         ] %}
 
     {% endif %}
@@ -36,7 +40,7 @@ RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start \
 {% block neutron_server_footer %}
 
 {% set driver_git_repo = "https://github.com/F5Networks/f5-openstack-lbaasv2-driver" %}
-{% set driver_tag = "v10.0.0" %}
+{% set driver_tag = "v10.1.0" %}
 
 RUN pip install git+{{ driver_git_repo }}@{{ driver_tag }} && \
   curl -L -o /tmp/f5.tgz https://github.com/F5Networks/neutron-lbaas/releases/download/v10.0.0/f5.tgz && \
