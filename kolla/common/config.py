@@ -258,7 +258,7 @@ SOURCES = {
     'f5-openstack-agent': {
         'type': 'url',
         'location': ('https://github.com/F5Networks/f5-openstack-agent/archive/'
-                     'v10.0.0.tar.gz')},
+                     'v10.1.0.tar.gz')},
     'neutron-sfc-agent': {
         'type': 'url',
         'location': ('http://tarballs.openstack.org/networking-sfc/'
