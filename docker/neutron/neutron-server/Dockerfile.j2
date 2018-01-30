@@ -11,6 +11,8 @@ MAINTAINER {{ maintainer }}
         {% set neutron_server_packages = [
             'openstack-neutron-lbaas',
             'openstack-neutron-vpnaas',
+            'python-pip',
+            'git',
         ] %}
 
     {% elif base_distro in ['ubuntu'] %}
@@ -19,6 +21,8 @@ MAINTAINER {{ maintainer }}
             'neutron-lbaasv2-agent',
             'python-neutron-lbaas',
             'python-neutron-vpnaas',
+            'python-pip',
+            'git',
         ] %}
 
     {% endif %}
@@ -44,8 +48,6 @@ RUN pip install git+{{ driver_git_repo }}@{{ driver_tag }} && \
   rm -rf /tmp/f5.tgz
 
 {% endblock %}
-
-
 
 {% block footer %}{% endblock %}
 
