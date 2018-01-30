@@ -1,0 +1,29 @@
+FROM {{ namespace }}/{{ image_prefix }}neutron-base:{{ tag }}
+MAINTAINER {{ maintainer }}
+
+{% if base_distro in ['centos', 'fedora', 'oraclelinux', 'rhel'] %}
+    RUN yum -y install python-pip git
+{% elif base_distro in ['ubuntu'] %}
+    RUN apt-get install -y python-pip git
+{% endif %}
+
+{% block f5_openstack_agent_header %}{% endblock %}
+
+{% import "macros.j2" as macros with context %}
+
+{% set agent_git_repo = "https://github.com/jgruber/f5-openstack-agent" %}
+{% set agent_tag = "ocata-devel" %}
+
+RUN pip install git+{{ agent_git_repo }}@{{ agent_tag }}
+
+COPY extend_start.sh /usr/local/bin/kolla_neutron_extend_start
+RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start
+
+# RUN sed -i 's/neutron.common import exceptions/neutron_lib import exceptions/g' /usr/lib/python2.7/site-packages/f5_openstack_agent/lbaasv2/drivers/bigip/agent_manager.py
+# RUN sed -i 's/neutron.common.exceptions/neutron_lib.exceptions/g' /usr/lib/python2.7/site-packages/f5_openstack_agent/lbaasv2/drivers/bigip/network_service.py
+# RUN sed -i 's/neutron.common.exceptions/neutron_lib.exceptions/g' /usr/lib/python2.7/site-packages/f5_openstack_agent/lbaasv2/drivers/bigip/icontrol_driver.py
+
+{% block f5_openstack_agent_footer %}{% endblock %}
+{% block footer %}{% endblock %}
+
+USER neutron
