@@ -18,7 +18,14 @@ MAINTAINER {{ maintainer }}
 {{ macros.install_packages(heat_engine_packages | customizable("packages")) }}
 
 {% endif %}
-{% block heat_engine_footer %}{% endblock %}
+{% block heat_engine_footer %}
+
+RUN curl -o /tmp/f5-openstack-heat-plugins.tar.gz https://raw.githubusercontent.com/jgruber/f5-openstack-heat-plugins/feature.licensing/dist/f5-openstack-heat-plugins-10.0.1.tar.gz \
+    && /usr/bin/pip install /tmp/f5-openstack-heat-plugins.tar.gz \
+    && mkdir -p /usr/lib/heat \
+    && ln -s /usr/lib/python2.7/site-packages/f5_heat /usr/lib/heat/f5_heat
+
+{% endblock %}
 {% block footer %}{% endblock %}
 
 USER heat
