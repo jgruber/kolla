@@ -1,0 +1,25 @@
+FROM {{ namespace }}/{{ image_prefix }}neutron-base:{{ tag }}
+MAINTAINER {{ maintainer }}
+
+{% if base_distro in ['centos', 'fedora', 'oraclelinux', 'rhel'] %}
+    RUN yum -y install python-pip git
+{% elif base_distro in ['ubuntu'] %}
+    RUN apt-get install -y python-pip git
+{% endif %}
+
+{% block f5_openstack_agent_header %}{% endblock %}
+
+{% import "macros.j2" as macros with context %}
+
+{% set agent_git_repo = "https://github.com/F5Networks/f5-openstack-agent" %}
+{% set agent_tag = "v9.8.2" %}
+
+RUN pip install git+{{ agent_git_repo }}@{{ agent_tag }}
+
+COPY extend_start.sh /usr/local/bin/kolla_neutron_extend_start
+RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start
+
+{% block f5_openstack_agent_footer %}{% endblock %}
+{% block footer %}{% endblock %}
+
+USER neutron

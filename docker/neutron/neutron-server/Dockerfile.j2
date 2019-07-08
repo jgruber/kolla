@@ -47,7 +47,17 @@ RUN {{ macros.install_pip(neutron_server_pip_packages | customizable("pip_packag
 COPY extend_start.sh /usr/local/bin/kolla_neutron_extend_start
 RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start
 
-{% block neutron_server_footer %}{% endblock %}
+{% block neutron_server_footer %}
+
+{% set driver_git_repo = "https://github.com/F5Networks/f5-openstack-lbaasv2-driver" %}
+{% set driver_tag = "v9.6.1" %}
+
+RUN pip install git+{{ driver_git_repo }}@{{ driver_tag }} && \
+  curl -L -o /tmp/f5.tgz https://github.com/F5Networks/neutron-lbaas/releases/download/v10.0.0/f5.tgz && \
+  tar xvf /tmp/f5.tgz -C /usr/lib/python2.7/site-packages/neutron_lbaas/drivers/ && \
+  rm -rf /tmp/f5.tgz
+
+{% endblock %}
 {% block footer %}{% endblock %}
 
 USER neutron
