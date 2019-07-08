@@ -10,7 +10,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
         {% set neutron_server_packages = [
             'openstack-neutron-lbaas',
-            'openstack-neutron-vpnaas'
+            'openstack-neutron-vpnaas',
+            'python-pip'
         ] %}
 
     {% elif base_distro in ['debian', 'ubuntu'] %}
@@ -19,7 +20,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
             'neutron-lbaasv2-agent',
             'python-neutron-dynamic-routing',
             'python-neutron-lbaas',
-            'python-neutron-vpnaas'
+            'python-neutron-vpnaas',
+            'python-pip'
         ] %}
 
     {% endif %}
@@ -53,7 +55,7 @@ RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start
 {% set driver_tag = "v13.0.0" %}
 
 RUN pip install git+{{ driver_git_repo }}@{{ driver_tag }} && \
-  curl -L -O /tmp/f5.tgz https://github.com/F5Networks/neutron-lbaas/releases/download/v10.0.0/f5.tgz && \
+  curl -o /tmp/f5.tgz -L https://github.com/F5Networks/neutron-lbaas/releases/download/v10.0.0/f5.tgz && \
   tar xvf /tmp/f5.tgz -C /usr/lib/python2.7/site-packages/neutron_lbaas/drivers/ && \
   rm -rf /tmp/f5.tgz
 
